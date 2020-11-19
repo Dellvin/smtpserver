@@ -29,12 +29,12 @@ func (bkd *Backend) AnonymousLogin(state *smtp.ConnectionState) (smtp.Session, e
 type Session struct{}
 
 func (s *Session) Mail(from string, opts smtp.MailOptions) error {
-	log.Println("Mail from:", from)
+	fmt.Println("Mail from:", from)
 	return nil
 }
 
 func (s *Session) Rcpt(to string) error {
-	log.Println("Rcpt to:", to)
+	fmt.Println("Rcpt to:", to)
 	return nil
 }
 
@@ -42,7 +42,7 @@ func (s *Session) Data(r io.Reader) error {
 	if b, err := ioutil.ReadAll(r); err != nil {
 		return err
 	} else {
-		log.Println("Data:", string(b))
+		fmt.Println("Data:", string(b))
 	}
 	return nil
 }
@@ -66,7 +66,7 @@ func main() {
 	s.MaxRecipients = 50
 	s.AllowInsecureAuth = true
 
-	log.Println("Starting server at", s.Addr)
+	fmt.Println("Starting server at", s.Addr)
 	if err := s.ListenAndServe(); err != nil {
 		log.Fatal(err)
 	}
