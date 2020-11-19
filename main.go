@@ -6,7 +6,6 @@ import (
 	"io/ioutil"
 	"log"
 	"time"
-
 	"github.com/emersion/go-smtp"
 )
 
@@ -22,7 +21,8 @@ func (bkd *Backend) Login(state *smtp.ConnectionState, username, password string
 // AnonymousLogin requires clients to authenticate using SMTP AUTH before sending emails
 func (bkd *Backend) AnonymousLogin(state *smtp.ConnectionState) (smtp.Session, error) {
 	fmt.Println("USPEX Anonymous")
-	return nil, smtp.ErrAuthRequired
+	ses:=smtp.Conn{}
+	return ses.Session(), smtp.ErrAuthRequired
 }
 
 // A Session is returned after successful login.
