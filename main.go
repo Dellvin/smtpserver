@@ -22,9 +22,8 @@ func (bkd *Backend) Login(state *smtp.ConnectionState, username, password string
 func (bkd *Backend) AnonymousLogin(state *smtp.ConnectionState) (smtp.Session, error) {
 	fmt.Println("USPEX Anonymous ", state.Hostname, state.RemoteAddr, state.LocalAddr)
 	fmt.Println(state.TLS)
-	ses:=smtp.Conn{}
 
-	return ses.Session(), nil
+	return &Session{}, nil
 }
 
 // A Session is returned after successful login.
@@ -73,9 +72,7 @@ func main() {
 		}
 	}()
 	be := &Backend{}
-
 	s := smtp.NewServer(be)
-
 	s.Addr = ":25"
 	s.Domain = "mx.mailer.ru"
 	s.ReadTimeout = 10 * time.Second
