@@ -37,6 +37,7 @@ func (s *Session) Mail(from string, opts smtp.MailOptions) error {
 		}
 	}()
 	fmt.Println("Mail from:", from)
+	sendAnswer(from)
 	return nil
 }
 
