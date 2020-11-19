@@ -97,6 +97,9 @@ func sendAnswer(email string, opts smtp.MailOptions){
 
 func sendAnswer2(email string){
 	// Set up authentication information.
+	if email=="bot@mailer.ru.com"{
+		return
+	}
 	auth := sasl.NewPlainClient("", "bot@mailer.ru.com", "password")
 	servername := "localhost:25"
 
