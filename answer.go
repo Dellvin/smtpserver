@@ -11,6 +11,11 @@ import (
 )
 
 func sendAnswer(email string, opts smtp.MailOptions){
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println("Recovered in getanswer", r)
+		}
+	}()
 	from := mail.Address{"", "test@mailer.ru.com"}
 	to   := mail.Address{"", email}
 	subj := "Hello"
@@ -30,7 +35,7 @@ func sendAnswer(email string, opts smtp.MailOptions){
 	message += "\r\n" + body
 
 	// Connect to the SMTP Server
-	servername := "mx.mailer.ru:25"
+	servername := "mailer.ru:25"
 
 	host, _, _ := net.SplitHostPort(servername)
 
