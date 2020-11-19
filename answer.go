@@ -3,23 +3,23 @@ package main
 import (
 	"crypto/tls"
 	"fmt"
-	"github.com/emersion/go-sasl"
 	"log"
 	"net"
 	"net/mail"
 	baseSMTP "net/smtp"
-	"github.com/emersion/go-smtp"
-	"strings"
 )
 
-func sendAnswer(email string, opts smtp.MailOptions){
+func sendAnswer(email string){
+		if email=="bot@mailer.ru.com"{
+			return
+		}
 	defer func() {
 		if r := recover(); r != nil {
 			fmt.Println("Recovered in getanswer", r)
 		}
 	}()
 	fmt.Println("HUI_1")
-	from := mail.Address{"", "test@mailer.ru.com"}
+	from := mail.Address{"", "bot@mailer.ru.com"}
 	to   := mail.Address{"", email}
 	subj := "Hello"
 	body := "We are happy to see you in our alfa smtp-test!"
@@ -38,7 +38,7 @@ func sendAnswer(email string, opts smtp.MailOptions){
 	message += "\r\n" + body
 
 	// Connect to the SMTP Server
-	servername := "mailer.ru:25"
+	servername := "localhost:25"
 
 	host, _, _ := net.SplitHostPort(servername)
 	fmt.Println("HUI_3")
@@ -95,24 +95,24 @@ func sendAnswer(email string, opts smtp.MailOptions){
 }
 
 
-func sendAnswer2(email string){
-	// Set up authentication information.
-	if email=="bot@mailer.ru.com"{
-		return
-	}
-	auth := sasl.NewPlainClient("", "bot@mailer.ru.com", "password")
-	servername := "localhost:25"
-
-
-	// Connect to the server, authenticate, set the sender and recipient,
-	// and send the email all in one step.
-	to := []string{email}
-	msg := strings.NewReader("To: "+email+"\r\n" +
-		"Subject: Hello SMTP!!!\r\n" +
-		"\r\n" +
-		"We are happy to see you in our alfa smtp-test!\r\n")
-	err := smtp.SendMail(servername, auth, "bot@mailer.ru.com", to, msg)
-	if err != nil {
-		log.Fatal(err)
-	}
-}
+//func sendAnswer2(email string){
+//	// Set up authentication information.
+//	if email=="bot@mailer.ru.com"{
+//		return
+//	}
+//	auth := sasl.NewPlainClient("", "bot@mailer.ru.com", "password")
+//	servername := "localhost:25"
+//
+//
+//	// Connect to the server, authenticate, set the sender and recipient,
+//	// and send the email all in one step.
+//	to := []string{email}
+//	msg := strings.NewReader("To: "+email+"\r\n" +
+//		"Subject: Hello SMTP!!!\r\n" +
+//		"\r\n" +
+//		"We are happy to see you in our alfa smtp-test!\r\n")
+//	err := smtp.SendMail(servername, auth, "bot@mailer.ru.com", to, msg)
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//}
