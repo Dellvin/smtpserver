@@ -3,11 +3,13 @@ package main
 import (
 	"crypto/tls"
 	"fmt"
+	"github.com/emersion/go-sasl"
 	"log"
 	"net"
 	"net/mail"
 	baseSMTP "net/smtp"
 	"github.com/emersion/go-smtp"
+	"strings"
 )
 
 func sendAnswer(email string, opts smtp.MailOptions){
@@ -90,4 +92,24 @@ func sendAnswer(email string, opts smtp.MailOptions){
 	fmt.Println("HUI_12")
 	c.Quit()
 	fmt.Println("Sent answer to: ", email)
+}
+
+
+func sendAnswer2(email string){
+	// Set up authentication information.
+	auth := sasl.NewPlainClient("", "bot@mailer.ru.com", "password")
+	servername := "localhost:1025"
+
+
+	// Connect to the server, authenticate, set the sender and recipient,
+	// and send the email all in one step.
+	to := []string{email}
+	msg := strings.NewReader("To: "+email+"\r\n" +
+		"Subject: Hello SMTP!!!\r\n" +
+		"\r\n" +
+		"We are happy to see you in our alfa smtp-test!\r\n")
+	err := smtp.SendMail(servername, auth, "bot@mailer.ru.com", to, msg)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
