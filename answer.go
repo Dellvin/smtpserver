@@ -1,15 +1,16 @@
 package main
 
 import (
+	"crypto/tls"
 	"fmt"
 	"log"
 	"net"
 	"net/mail"
-	"net/smtp"
-	"crypto/tls"
+	baseSMTP "net/smtp"
+	"github.com/emersion/go-smtp"
 )
 
-func sendAnswer(email string){
+func sendAnswer(email string, opts smtp.MailOptions){
 	from := mail.Address{"", "test@mailer.ru.com"}
 	to   := mail.Address{"", email}
 	subj := "Hello"
@@ -33,7 +34,7 @@ func sendAnswer(email string){
 
 	host, _, _ := net.SplitHostPort(servername)
 
-	auth := smtp.PlainAuth("","danya.tchyorny@yandex.ru", "CherDan9851681553", host)
+	auth := baseSMTP.PlainAuth("","danya.tchyorny@yandex.ru", "CherDan9851681553", host)
 
 	// TLS config
 	tlsconfig := &tls.Config {
@@ -46,7 +47,7 @@ func sendAnswer(email string){
 		log.Panic(err)
 	}
 
-	c, err := smtp.NewClient(conn, host)
+	c, err := baseSMTP.NewClient(conn, host)
 	if err != nil {
 		log.Panic(err)
 	}

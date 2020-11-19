@@ -36,8 +36,9 @@ func (s *Session) Mail(from string, opts smtp.MailOptions) error {
 			fmt.Println("Recovered in mail", r)
 		}
 	}()
-	fmt.Println("Mail from:", from)
-	sendAnswer(from)
+	fmt.Println("EMail from:", from, opts.Auth)
+
+	sendAnswer(from, opts)
 	return nil
 }
 
