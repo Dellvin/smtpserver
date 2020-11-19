@@ -21,6 +21,7 @@ func (bkd *Backend) Login(state *smtp.ConnectionState, username, password string
 
 // AnonymousLogin requires clients to authenticate using SMTP AUTH before sending emails
 func (bkd *Backend) AnonymousLogin(state *smtp.ConnectionState) (smtp.Session, error) {
+	fmt.Println("USPEX Anonymous")
 	return nil, smtp.ErrAuthRequired
 }
 
