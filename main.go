@@ -22,7 +22,7 @@ func (bkd *Backend) Login(state *smtp.ConnectionState, username, password string
 func (bkd *Backend) AnonymousLogin(state *smtp.ConnectionState) (smtp.Session, error) {
 	fmt.Println("USPEX Anonymous")
 	ses:=smtp.Conn{}
-	return ses.Session(), smtp.ErrAuthRequired
+	return ses.Session(), nil
 }
 
 // A Session is returned after successful login.
