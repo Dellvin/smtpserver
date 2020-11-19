@@ -29,6 +29,7 @@ func (bkd *Backend) AnonymousLogin(state *smtp.ConnectionState) (smtp.Session, e
 type Session struct{}
 
 func (s *Session) Mail(from string, opts smtp.MailOptions) error {
+	fmt.Println("HUI")
 	defer func() {
 		if r := recover(); r != nil {
 			fmt.Println("Recovered in mail", r)
