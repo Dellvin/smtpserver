@@ -30,11 +30,11 @@ func sendAnswer(email string, opts smtp.MailOptions){
 	message += "\r\n" + body
 
 	// Connect to the SMTP Server
-	servername := "localhost:1025"
+	servername := "mx.mailer.ru:25"
 
 	host, _, _ := net.SplitHostPort(servername)
 
-	auth := baseSMTP.PlainAuth("","danya.tchyorny@yandex.ru", "CherDan9851681553", host)
+	auth := baseSMTP.PlainAuth("",from.String(), "keklol123", host)
 
 	// TLS config
 	tlsconfig := &tls.Config {
