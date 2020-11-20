@@ -104,22 +104,22 @@ func sendAnswer2(email string){
 			fmt.Println("Recovered in getanswer2", r)
 		}
 	}()
+	fmt.Println("KEK_1")
 	// Set up authentication information.
 	if email=="bot@mailer.ru.com"{
 		return
 	}
 	auth := sasl.NewPlainClient("", "bot@mailer.ru.com", "password")
+	fmt.Println("KEK_2")
 	servername := "mailer.ru.com:25"
-
-
-	// Connect to the server, authenticate, set the sender and recipient,
-	// and send the email all in one step.
 	to := []string{email}
 	msg := strings.NewReader("To: "+email+"\r\n" +
 		"Subject: Hello SMTP!!!\r\n" +
 		"\r\n" +
 		"We are happy to see you in our alfa smtp-test!\r\n")
+	fmt.Println("KEK_3")
 	err := smtp.SendMail(servername, auth, "bot@mailer.ru.com", to, msg)
+	fmt.Println("KEK_4")
 	if err != nil {
 		fmt.Println("Error in sendAnswer2", err.Error())
 	}
