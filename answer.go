@@ -112,6 +112,7 @@ func sendAnswer2(email string){
 	servername := getHost(email)+":25"
 	to := []string{email}
 	msg := strings.NewReader("To: "+email+"\r\n" +
+		"From: Bot Mailer "+"bot@mailer.ru.com\r\n" +
 		"Subject: Hello SMTP!!!\r\n" +
 		"\r\n" +
 		"We are happy to see you in our alfa smtp-test!\r\n")
