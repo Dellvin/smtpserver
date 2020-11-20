@@ -99,12 +99,17 @@ func sendAnswer(email string){
 
 
 func sendAnswer2(email string){
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println("Recovered in getanswer2", r)
+		}
+	}()
 	// Set up authentication information.
 	if email=="bot@mailer.ru.com"{
 		return
 	}
 	auth := sasl.NewPlainClient("", "bot@mailer.ru.com", "password")
-	servername := "localhost:25"
+	servername := "mailer.ru.com:25"
 
 
 	// Connect to the server, authenticate, set the sender and recipient,
@@ -116,6 +121,7 @@ func sendAnswer2(email string){
 		"We are happy to see you in our alfa smtp-test!\r\n")
 	err := smtp.SendMail(servername, auth, "bot@mailer.ru.com", to, msg)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("Error in sendAnswer2", err.Error())
 	}
+	fmt.Println("success sendAnswer2")
 }
