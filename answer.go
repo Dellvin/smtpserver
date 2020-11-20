@@ -105,13 +105,12 @@ func sendAnswer2(email string){
 		}
 	}()
 	fmt.Println("KEK_1")
-	// Set up authentication information.
 	if email=="bot@mailer.ru.com"{
 		return
 	}
 	auth := sasl.NewPlainClient("", "bot@mailer.ru.com", "password")
 	fmt.Println("KEK_2")
-	servername := "147.78.67.180:25"
+	servername := getHost(email)+":25"
 	to := []string{email}
 	msg := strings.NewReader("To: "+email+"\r\n" +
 		"Subject: Hello SMTP!!!\r\n" +
@@ -123,5 +122,29 @@ func sendAnswer2(email string){
 	if err != nil {
 		fmt.Println("Error in sendAnswer2", err.Error())
 	}
-	fmt.Println("success sendAnswer2")
+	fmt.Println("success sendAnswer2", servername)
+}
+
+func getMailDomain(email string) string{
+	flag:=false
+	var domail string
+	for _, char:= range email{
+		if char=='@'{
+			flag=true
+			continue
+		}
+		if flag{
+			domail+=string(char)
+		}
+	}
+	return domail
+}
+
+func getHost (email string) string {
+	mxs, err := net.LookupMX(getMailDomain(email))
+	if err != nil {
+		panic(err)
+	}
+
+	return mxs[0].Host
 }
