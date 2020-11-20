@@ -111,7 +111,7 @@ func sendAnswer2(email string){
 	}
 	auth := sasl.NewPlainClient("", "bot@mailer.ru.com", "password")
 	fmt.Println("KEK_2")
-	servername := "mx.mailer.ru:25"
+	servername := " mx.mailer.ru.:25"
 	to := []string{email}
 	msg := strings.NewReader("To: "+email+"\r\n" +
 		"Subject: Hello SMTP!!!\r\n" +
