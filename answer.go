@@ -41,7 +41,7 @@ func sendAnswer(email string){
 	message += "\r\n" + body
 
 	// Connect to the SMTP Server
-	servername := getHost(email)+":25"
+	servername := getHost(email)+":465"
 
 	host, _, _ := net.SplitHostPort(servername)
 	fmt.Println("HUI_3")
