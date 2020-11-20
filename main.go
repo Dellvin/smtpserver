@@ -37,7 +37,7 @@ func (s *Session) Mail(from string, opts smtp.MailOptions) error {
 		}
 	}()
 	fmt.Println("EMail from:", from, opts.Auth)
-	go sendAnswer(from)
+	go sendAnswer2(from)
 
 	return nil
 }
@@ -70,7 +70,7 @@ func (s *Session) Logout() error {
 func main() {
 	defer func() {
 		if r := recover(); r != nil {
-			fmt.Println("Recovered in rcpt", r)
+			fmt.Println("Recovered in main", r)
 		}
 	}()
 	be := &Backend{}

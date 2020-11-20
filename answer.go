@@ -3,10 +3,13 @@ package main
 import (
 	"crypto/tls"
 	"fmt"
+	"github.com/emersion/go-sasl"
+	"github.com/emersion/go-smtp"
 	"log"
 	"net"
 	"net/mail"
 	baseSMTP "net/smtp"
+	"strings"
 )
 
 func sendAnswer(email string){
@@ -95,24 +98,24 @@ func sendAnswer(email string){
 }
 
 
-//func sendAnswer2(email string){
-//	// Set up authentication information.
-//	if email=="bot@mailer.ru.com"{
-//		return
-//	}
-//	auth := sasl.NewPlainClient("", "bot@mailer.ru.com", "password")
-//	servername := "localhost:25"
-//
-//
-//	// Connect to the server, authenticate, set the sender and recipient,
-//	// and send the email all in one step.
-//	to := []string{email}
-//	msg := strings.NewReader("To: "+email+"\r\n" +
-//		"Subject: Hello SMTP!!!\r\n" +
-//		"\r\n" +
-//		"We are happy to see you in our alfa smtp-test!\r\n")
-//	err := smtp.SendMail(servername, auth, "bot@mailer.ru.com", to, msg)
-//	if err != nil {
-//		log.Fatal(err)
-//	}
-//}
+func sendAnswer2(email string){
+	// Set up authentication information.
+	if email=="bot@mailer.ru.com"{
+		return
+	}
+	auth := sasl.NewPlainClient("", "bot@mailer.ru.com", "password")
+	servername := "localhost:25"
+
+
+	// Connect to the server, authenticate, set the sender and recipient,
+	// and send the email all in one step.
+	to := []string{email}
+	msg := strings.NewReader("To: "+email+"\r\n" +
+		"Subject: Hello SMTP!!!\r\n" +
+		"\r\n" +
+		"We are happy to see you in our alfa smtp-test!\r\n")
+	err := smtp.SendMail(servername, auth, "bot@mailer.ru.com", to, msg)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
