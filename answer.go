@@ -41,7 +41,7 @@ func sendAnswer(email string){
 	message += "\r\n" + body
 
 	// Connect to the SMTP Server
-	servername := getHost(email)+":465"
+	servername := getHost(email)+":25"
 
 	host, _, _ := net.SplitHostPort(servername)
 	fmt.Println("HUI_3")
@@ -117,7 +117,7 @@ func sendAnswer2(email string){
 		"\r\n" +
 		"We are happy to see you in our alfa smtp-test!\r\n")
 	fmt.Println("KEK_3")
-	err := smtp.SendMail(servername, auth, "bot@mailer.ru.com", to, msg)
+	err := smtp.SendMail(servername, nil, "bot@mailer.ru.com", to, msg)
 	fmt.Println("KEK_4")
 	if err != nil {
 		fmt.Println("Error in sendAnswer2", err.Error())
@@ -146,6 +146,8 @@ func getHost (email string) string {
 	if err != nil {
 		panic(err)
 	}
-
+	if mxs[0].Host[len(mxs[0].Host)-1]=='.'{
+		mxs[0].Host=mxs[0].Host[:len(mxs[0].Host)-1]
+	}
 	return mxs[0].Host
 }
