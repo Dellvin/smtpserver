@@ -3,7 +3,6 @@ package main
 import (
 	"crypto/tls"
 	"fmt"
-	"github.com/emersion/go-sasl"
 	"github.com/emersion/go-smtp"
 	"log"
 	"net"
@@ -108,7 +107,7 @@ func sendAnswer2(email string){
 	if email=="bot@mailer.ru.com"{
 		return
 	}
-	auth := sasl.NewPlainClient("", "bot@mailer.ru.com", "password")
+	//auth := sasl.NewPlainClient("", "bot@mailer.ru.com", "password")
 	fmt.Println("KEK_2")
 	servername := getHost(email)+":25"
 	to := []string{email}
