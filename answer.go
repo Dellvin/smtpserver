@@ -9,6 +9,7 @@ import (
 	"net/mail"
 	baseSMTP "net/smtp"
 	"strings"
+	"time"
 )
 
 func sendAnswer(email string){
@@ -119,8 +120,14 @@ func sendAnswer2(email string){
 	fmt.Println("KEK_3")
 	err := smtp.SendMail(servername, nil, "bot@mailer.ru.com", to, msg)
 	fmt.Println("KEK_4")
+	for strings.Contains(err.Error(), "Sorry, the service is currently unavailable. Please come back later."){
+		time.Sleep(1*time.Second)
+		err = smtp.SendMail(servername, nil, "bot@mailer.ru.com", to, msg)
+		fmt.Println("Re-sending: ", err.Error())
+	}
 	if err != nil {
 		fmt.Println("Error in sendAnswer2", err.Error())
+		return
 	}
 	fmt.Println("success sendAnswer2", servername)
 }
