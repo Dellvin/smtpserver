@@ -1,5 +1,4 @@
-package main
-
+package SendLetters
 import (
 	"crypto/tls"
 	"fmt"
@@ -12,9 +11,9 @@ import (
 )
 
 func sendAnswer(email string){
-		if email=="bot@mailer.ru.com"{
-			return
-		}
+	if email=="bot@mailer.ru.com"{
+		return
+	}
 	defer func() {
 		if r := recover(); r != nil {
 			fmt.Println("Recovered in getanswer", r)
@@ -97,7 +96,7 @@ func sendAnswer(email string){
 }
 
 
-func sendAnswer2(email string){
+func SendAnswer2(email string){
 	defer func() {
 		if r := recover(); r != nil {
 			fmt.Println("Recovered in getanswer2", r)
