@@ -2,13 +2,11 @@ package main
 
 import (
 	"fmt"
-	"smtpTest/internal/GetLetters"
-	"log"
-	"time"
 	"github.com/emersion/go-smtp"
+	"log"
+	"smtpTest/internal/GetLetters"
+	"time"
 )
-
-
 
 func main() {
 	defer func() {
